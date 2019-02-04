@@ -1,3 +1,5 @@
+import * as t from "@babel/types";
+
 /**
  * Plugin entry point.
  * @returns {undefined}
@@ -9,8 +11,9 @@ export default function babelPluginCloudinary() {
                 if (
                     path.node && path.node.callee && path.node.callee.name === "url"
                 ) {
-                    // eslint-disable-next-line
-                    console.log("success");
+                  path.replaceWith(
+                    t.callExpression(t.identifier("_transpiledURL"), [ t.stringLiteral("imageName") ]),
+                  );
                 }
             },
         },

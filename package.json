@@ -9,6 +9,7 @@
     "dist": "babel src --out-dir lib",
     "lint:fix": "eslint --fix src test",
     "lint": "eslint --config=.eslintrc.js \"src/**/*.js\" \"test/**/*.js\"",
+    "test:clean": "jest --no-cache --updateSnapshot",
     "test": "npm run dist && jest --verbose --coverage"
   },
   "engines": {
