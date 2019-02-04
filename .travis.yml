@@ -1,6 +1,10 @@
-# TODO: Configure proper CI integration
 language: node_js
 node_js:
     - "8.11.0"
 install:
     - npm install
+before_script:
+    - npm run dist
+script:
+    - npm run lint
+    - npm run test
