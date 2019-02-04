@@ -1,0 +1,11 @@
+.git
+.gitignore
+.github
+.vscode
+coverage
+test
+.babelrc
+.editorconfig
+.eslintrc.js
+.travis.yml
+package-lock.json

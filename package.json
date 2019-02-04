@@ -1,0 +1,55 @@
+{
+  "name": "babel-plugin-cloudinary",
+  "version": "0.0.0",
+  "description": "Compile cloudinary URLs at build time",
+  "main": "lib/index.js",
+  "scripts": {
+    "check": "npm run dist && npm run lint && npm run test",
+    "dev": "nodemon --exec npm run test --watch src --watch test --silent",
+    "dist": "babel src --out-dir lib",
+    "lint:fix": "eslint --fix src test",
+    "lint": "eslint --config=.eslintrc.js \"src/**/*.js\" \"test/**/*.js\"",
+    "test:clean": "jest --env node --no-cache --updateSnapshot",
+    "test": "npm run dist && jest --env node --verbose --coverage"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trivago/babel-plugin-cloudinary.git"
+  },
+  "keywords": [
+    "babel",
+    "plugin",
+    "cloudinary",
+    "trivago"
+  ],
+  "author": "Daniel Caldas",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/trivago/babel-plugin-cloudinary/issues"
+  },
+  "homepage": "https://github.com/trivago/babel-plugin-cloudinary#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.25.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-types": "^6.26.0",
+    "eslint": "^5.12.1",
+    "eslint-config-recommended": "^4.0.0",
+    "eslint-plugin-jest": "^22.2.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^22.4.4",
+    "lint-staged": "^8.1.1",
+    "nodemon": "^1.18.9",
+    "typescript": "^3.2.4"
+  },
+  "lint-staged": {
+    "*.{js,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
