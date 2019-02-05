@@ -9,8 +9,8 @@
     "dist": "babel src --out-dir lib",
     "lint:fix": "eslint --fix src test",
     "lint": "eslint --config=.eslintrc.js \"src/**/*.js\" \"test/**/*.js\"",
-    "test:clean": "jest --env node --no-cache --updateSnapshot",
-    "test": "npm run dist && jest --env node --verbose --coverage"
+    "test:clean": "jest --env=node --no-cache --updateSnapshot",
+    "test": "npm run dist && jest --env=node --verbose --coverage"
   },
   "engines": {
     "node": ">=8.9.0"

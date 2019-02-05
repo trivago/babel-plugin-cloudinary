@@ -88,4 +88,4 @@ typings/
 # Custom .gitignore configs
 lib/
 .DS_Store
-
+.vscode
