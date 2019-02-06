@@ -18,22 +18,19 @@ const PLUGIN_PARAMETERS = {
   postfix: {
     key: "postfix",
     ord: 4,
-    placeholder: "__POSTFIX__",
   },
   prefix: {
     key: "prefix",
     ord: 2,
-    placeholder: "__PREFIX__",
   },
   resourceExtension: {
     key: "resourceExtension",
     ord: 5,
-    placeholder: "__RESOURCE_EXTENSION__",
   },
   assetName: {
     key: "assetName",
     ord: 3,
-    placeholder: "__ASSET_NAME__",
+    placeholder: "ASSET_NAME",
   },
 };
 
