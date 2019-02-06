@@ -5,11 +5,11 @@
   "main": "lib/index.js",
   "scripts": {
     "check": "npm run lint && npm run test",
-    "dev": "nodemon --exec npm run test --watch src --watch test --silent",
+    "dev": "nodemon --exec jest --env=node --watch src --watch test",
     "lint:fix": "eslint --fix src test",
     "lint": "eslint --config=.eslintrc.js \"src/**/*.js\" \"test/**/*.js\"",
     "prepublish": "npm run check",
-    "test:clean": "jest --env=node --no-cache --updateSnapshot",
+    "test:clean": "jest --env=node --verbose --coverage --no-cache --updateSnapshot",
     "test": "jest --env=node --verbose --coverage"
   },
   "engines": {
