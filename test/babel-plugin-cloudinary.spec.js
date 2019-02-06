@@ -15,7 +15,7 @@ describe("babel-plugin-cloudinary", () => {
           const extMobile = '.png';
           const extDesktop = '.jpeg';
 
-          const imageUrl = __buildCloudinaryUrl__(
+          const imageUrl = __buildCloudinaryUrl(
             'my-picture', {
               transformation: {
                 transformation: 'crop',
@@ -39,7 +39,7 @@ describe("babel-plugin-cloudinary", () => {
     describe("and all parameters are static", () => {
       it("should compile to correct cloudinary URL template", () => {
         const input = `
-          const imageUrl = __buildCloudinaryUrl__(
+          const imageUrl = __buildCloudinaryUrl(
             'my-picture', {
               transformation: {
                 transformation: 'crop',

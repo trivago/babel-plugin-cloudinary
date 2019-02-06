@@ -2,7 +2,7 @@ const t = require("babel-types");
 const utils = require("./utils");
 
 // TODO: make the callee name configurable via .cloudinaryrc
-const CALLEE_NAME = "__buildCloudinaryUrl__";
+const CALLEE_NAME = "__buildCloudinaryUrl";
 
 // TODO: <host>
 //"http[s]://<host>/<transformations>/<prefix>[ASSET_NAME]<postfix><resourceExtension>"
