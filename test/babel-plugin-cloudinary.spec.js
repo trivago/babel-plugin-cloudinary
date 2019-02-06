@@ -1,5 +1,5 @@
-import * as babel from "babel-core";
-import plugin from "../lib";
+const babel = require("babel-core");
+const plugin = require("../src");
 
 describe("babel-plugin-cloudinary", () => {
   it("sample", () => {

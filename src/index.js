@@ -1,10 +1,10 @@
-import * as t from "babel-types";
+const t = require("babel-types");
 
 /**
  * Plugin entry point.
  * @returns {undefined}
  */
-export default function babelPluginCloudinary() {
+module.exports = function babelPluginCloudinary() {
     return {
         visitor: {
             CallExpression(path) {
@@ -18,4 +18,4 @@ export default function babelPluginCloudinary() {
             },
         },
     };
-}
+};
