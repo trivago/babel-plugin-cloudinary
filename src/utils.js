@@ -38,18 +38,18 @@ const IMG_HOST = `//${runConfig.host}`;
  * // templateLiteral > `https://res.cloudinary.com/trv/image/upload/c_fill,d_dummy.jpeg,f_auto,h_${width},q_auto:eco,w_${height}/`
  */
 function convertUrlIntoTemplateLiteral(url, mappings, placeholder) {
-  const rgx = new RegExp(`${placeholder}\\d+`, "gi");
+  const isStatic = !Object.keys(mappings).length;
+
+  if (isStatic) {
+    return {
+      quasis: [templateElement("")],
+      expressions: [t.stringLiteral(url)],
+    };
+  }
+
+  const rgx = new RegExp(`${placeholder}\\d*`, "gi");
   const expressions = url.match(rgx).map(prop => mappings[prop]);
   const quasis = url.split(rgx).map(templateElement);
-
-  // keep pairing between expressions and quasis with empty literals
-  if (expressions.length < quasis.length) {
-    const offset = quasis.length - expressions.length;
-
-    for (let i = 0; i < offset; i++) {
-      expressions.push(t.stringLiteral(""));
-    }
-  }
 
   return {
     quasis,
@@ -69,6 +69,7 @@ function getImageUrl(assetName, transforms) {
   const url = cl.url(assetName, transforms);
 
   if (runConfig.overrideBaseUrl) {
+    // FIXME: not working
     return url.replace(BASE_URL_PLACEHOLDER, IMG_HOST);
   }
 
@@ -124,16 +125,16 @@ function templateElement(str) {
  * original transform and a mappings object that keeps track of the original
  * dynamic variables/expressions mapping them to the respective placeholder.
  */
-function unfoldDynamicTransform(node, placeholder) {
+function replaceExpressions(node, placeholder) {
   let count = 0;
   const mappings = {};
 
-  const _unfoldDynamicTransform = node => {
+  const _replaceExpressions = node => {
     if (t.isArrayExpression(node)) {
-      return node.elements.map(_unfoldDynamicTransform);
+      return node.elements.map(_replaceExpressions);
     } else if (t.isObjectExpression(node)) {
       return node.properties.reduce((obj, prop) => {
-        obj[prop.key.name || prop.key.value] = _unfoldDynamicTransform(prop.value);
+        obj[prop.key.name || prop.key.value] = _replaceExpressions(prop.value);
         return obj;
       }, {});
     } else if (
@@ -142,21 +143,23 @@ function unfoldDynamicTransform(node, placeholder) {
       t.isCallExpression(node) ||
       t.isMemberExpression(node)
     ) {
-      count++;
-      mappings[`${placeholder}${count}`] = node;
+      const nodeKey = `${placeholder}${count || ""}`;
 
-      return `${placeholder}${count}`;
+      mappings[nodeKey] = node;
+      count++;
+
+      return nodeKey;
     } else if (t.isLiteral(node)) {
       return node.value;
     } else {
-      throw new Error(`[unfoldDynamicTransform] Can't preval ${JSON.stringify(node)}`);
+      throw new Error(`[replaceExpressions] Can't preval ${JSON.stringify(node)}`);
     }
   };
 
-  const transforms = _unfoldDynamicTransform(node);
+  const expressions = _replaceExpressions(node);
 
   return {
-    transforms,
+    expressions,
     mappings,
   };
 }
@@ -166,5 +169,5 @@ module.exports = {
   getImageUrl,
   preval,
   templateElement,
-  unfoldDynamicTransform,
+  replaceExpressions,
 };
