@@ -8,6 +8,7 @@
     "dev": "nodemon --exec npm run test --watch src --watch test --silent",
     "lint:fix": "eslint --fix src test",
     "lint": "eslint --config=.eslintrc.js \"src/**/*.js\" \"test/**/*.js\"",
+    "prepublish": "npm run check",
     "test:clean": "jest --env=node --no-cache --updateSnapshot",
     "test": "jest --env=node --verbose --coverage"
   },
