@@ -6,33 +6,34 @@ const CALLEE_NAME = "__buildCloudinaryUrl";
 
 // TODO: <host>
 //"http[s]://<host>/<transformations>/<prefix>[ASSET_NAME]<postfix><resourceExtension>"
+// FIXME: cleanup properties that are not being used
 const PLUGIN_PARAMETERS = {
   // FIXME: rename transformation -> transformation[s]
   transformation: {
-    KEY: "transformation",
-    ORD: 1,
-    PLACEHOLDER: "TRANSFORM",
-    VALIDATE: () => true, // TODO: run validate methods for all expressions
+    key: "transformation",
+    ord: 1,
+    placeholder: "TRANSFORM",
+    validate: () => true, // TODO: run validate methods for all expressions
   },
   postfix: {
-    KEY: "postfix",
-    ORD: 4,
-    PLACEHOLDER: "__POSTFIX__",
+    key: "postfix",
+    ord: 4,
+    placeholder: "__POSTFIX__",
   },
   prefix: {
-    KEY: "prefix",
-    ORD: 2,
-    PLACEHOLDER: "__PREFIX__",
+    key: "prefix",
+    ord: 2,
+    placeholder: "__PREFIX__",
   },
   resourceExtension: {
-    KEY: "resourceExtension",
-    ORD: 5,
-    PLACEHOLDER: "__RESOURCE_EXTENSION__",
+    key: "resourceExtension",
+    ord: 5,
+    placeholder: "__RESOURCE_EXTENSION__",
   },
   assetName: {
-    KEY: "assetName",
-    ORD: 3,
-    PLACEHOLDER: "__ASSET_NAME__",
+    key: "assetName",
+    ord: 3,
+    placeholder: "__ASSET_NAME__",
   },
 };
 
@@ -81,27 +82,23 @@ function processUrl(path) {
   // FIXME: what about when parameters.transformation is not defined?
   const { expressions: staticBaseTransforms, mappings } = utils.replaceExpressions(
     parameters.transformation,
-    PLUGIN_PARAMETERS.transformation.PLACEHOLDER
+    PLUGIN_PARAMETERS.transformation.placeholder
   );
 
+  // FIXME: avoid deletion or make it more clear
   delete parameters.transformation;
-
+  // FIXME: get rid of isStatic when refactoring the build of quasis
   const isStatic = !Object.keys(mappings).length;
 
   // URL generation
   const url = utils
-    .getImageUrl(PLUGIN_PARAMETERS.assetName.PLACEHOLDER, staticBaseTransforms)
-    .split(PLUGIN_PARAMETERS.assetName.PLACEHOLDER);
+    .getImageUrl(PLUGIN_PARAMETERS.assetName.placeholder, staticBaseTransforms)
+    .split(PLUGIN_PARAMETERS.assetName.placeholder);
   const { quasis: baseQuasis, expressions: baseExpressions } = utils.convertUrlIntoTemplateLiteral(
     url[0],
     mappings,
-    PLUGIN_PARAMETERS.transformation.PLACEHOLDER
+    PLUGIN_PARAMETERS.transformation.placeholder
   );
-
-  // TODO: read from path.node.arguments
-  const prefix = parameters.prefix || "";
-  const postfix = parameters.postfix || "";
-  const resourceExtension = parameters.resourceExtension || "";
   // TODO: after doing the above we need to sort the quasis and expressions by ORD?? Still not clear this implementation
   const quasis = [
     ...baseQuasis,
@@ -111,8 +108,13 @@ function processUrl(path) {
     utils.templateElement(""),
     ...[isStatic && utils.templateElement("")].filter(Boolean),
   ];
-
-  const expressions = [...baseExpressions, prefix, assetName, postfix, resourceExtension];
+  const allParameters = Object.assign({}, parameters, { assetName });
+  const expressions = [
+    ...baseExpressions,
+    ...Object.keys(allParameters)
+      .sort((paramA, paramB) => PLUGIN_PARAMETERS[paramA].ord > PLUGIN_PARAMETERS[paramB].ord)
+      .map(key => allParameters[key]),
+  ];
 
   path.replaceWith(t.expressionStatement(t.templateLiteral(quasis, expressions)));
 }
