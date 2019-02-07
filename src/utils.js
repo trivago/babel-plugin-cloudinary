@@ -126,6 +126,13 @@ function templateElement(str) {
  * dynamic variables/expressions mapping them to the respective placeholder.
  */
 function replaceExpressions(node, placeholder) {
+  if (!node) {
+    return {
+      expressions: {},
+      mappings: {},
+    };
+  }
+
   let count = 0;
   const mappings = {};
 

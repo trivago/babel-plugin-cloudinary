@@ -1,5 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`babel-plugin-cloudinary when \`options.transformations\` is not provided should compile to correct cloudinary URL template 1`] = `
+"
+const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/'}\${'gallery/sand/'}\${'my-picture'}\${'_v10'}\${'.png'}\`;"
+`;
+
 exports[`babel-plugin-cloudinary when all parameters are defined and all parameters are dynamic (variables, function calls and conditionals) should compile to correct cloudinary URL template 1`] = `
 "
 const isMobile = false;
@@ -17,4 +22,9 @@ const imageUrl = \`https://res.cloudinary.com/trivago/image/upload/c_fill,h_\${g
 exports[`babel-plugin-cloudinary when all parameters are defined and all parameters are static should compile to correct cloudinary URL template 1`] = `
 "
 const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/c_fill,h_300,q_auto:good,t_crop,w_200/'}\${'gallery/sand/'}\${'my-picture'}\${'_v10'}\${'.png'}\`;"
+`;
+
+exports[`babel-plugin-cloudinary when only \`options.transformations\` is provided should compile to correct cloudinary URL template 1`] = `
+"
+const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/c_fill,h_300,q_auto:good,t_crop,w_200/'}\${'my-picture'}\${'.jpeg'}\${}\${}\`;"
 `;

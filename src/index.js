@@ -5,8 +5,8 @@ const utils = require("./utils");
 const CALLEE_NAME = "__buildCloudinaryUrl";
 
 // TODO: <host>
-//"http[s]://<host>/<transformations>/<prefix>[ASSET_NAME]<postfix><resourceExtension>"
 // FIXME: cleanup properties that are not being used
+// http[s]://<host>/<transformations>/<prefix><assetName><postfix><resourceExtension>
 const PLUGIN_PARAMETERS = {
   // FIXME: rename transformation -> transformation[s]
   transformation: {
@@ -24,6 +24,8 @@ const PLUGIN_PARAMETERS = {
     ord: 2,
   },
   resourceExtension: {
+    default: ".jpeg",
+    defaultType: "stringLiteral",
     key: "resourceExtension",
     ord: 5,
   },
@@ -74,10 +76,7 @@ function mapOptions(options) {
  */
 function processUrl(path) {
   const [assetName, options] = path.node.arguments;
-  // const { transformation: transforms } = options;
   const parameters = mapOptions(options);
-  // TODO: refactor call to utils.replaceExpressions into something that will support all PARAMETERS
-  // FIXME: what about when parameters.transformation is not defined?
   const { expressions: staticBaseTransforms, mappings } = utils.replaceExpressions(
     parameters.transformation,
     PLUGIN_PARAMETERS.transformation.placeholder
@@ -106,12 +105,19 @@ function processUrl(path) {
     utils.templateElement(""),
     ...[isStatic && utils.templateElement("")].filter(Boolean),
   ];
-  const allParameters = Object.assign({}, parameters, { assetName });
+  const allPluginParameters = Object.assign({}, parameters, { assetName });
   const expressions = [
     ...baseExpressions,
-    ...Object.keys(allParameters)
+    ...Object.keys(PLUGIN_PARAMETERS)
       .sort((paramA, paramB) => PLUGIN_PARAMETERS[paramA].ord > PLUGIN_PARAMETERS[paramB].ord)
-      .map(key => allParameters[key]),
+      .map(param => {
+        if (allPluginParameters[param]) {
+          return allPluginParameters[param];
+        } else if (PLUGIN_PARAMETERS[param].default && PLUGIN_PARAMETERS[param].defaultType) {
+          return t[PLUGIN_PARAMETERS[param].defaultType](PLUGIN_PARAMETERS[param].default);
+        }
+      })
+      .filter(Boolean),
   ];
 
   path.replaceWith(t.expressionStatement(t.templateLiteral(quasis, expressions)));

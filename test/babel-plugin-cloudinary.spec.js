@@ -61,11 +61,43 @@ describe("babel-plugin-cloudinary", () => {
     });
   });
 
-  // describe("when `options.transformations` is not provided", () => {
-  // });
+  describe("when `options.transformations` is not provided", () => {
+    it("should compile to correct cloudinary URL template", () => {
+      const input = `
+        const imageUrl = __buildCloudinaryUrl(
+          'my-picture', {
+            prefix: 'gallery/sand/',
+            postfix: '_v10',
+            resourceExtension: '.png',
+          }
+      );`;
 
-  // describe("when `options.transformations` is provided", () => {
-  // });
+      const { code } = babel.transform(input, { plugins: [plugin] });
+
+      expect(code).toMatchSnapshot();
+    });
+  });
+
+  describe("when only `options.transformations` is provided", () => {
+    it("should compile to correct cloudinary URL template", () => {
+      const input = `
+          const imageUrl = __buildCloudinaryUrl(
+            'my-picture', {
+              transformation: {
+                transformation: 'crop',
+                crop: 'fill',
+                quality: 'auto:good',
+                width: 200,
+                height: 300
+              }
+            }
+        );`;
+
+      const { code } = babel.transform(input, { plugins: [plugin] });
+
+      expect(code).toMatchSnapshot();
+    });
+  });
 
   // describe("when `options` are not provided", () => {
   //   it("`options` is an empty object", () => {
@@ -80,4 +112,6 @@ describe("babel-plugin-cloudinary", () => {
 
   //   });
   // });
+
+  // TODO: when we have multilevel transforms!
 });
