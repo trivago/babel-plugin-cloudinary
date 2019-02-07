@@ -1,39 +1,9 @@
 const t = require("babel-types");
 const utils = require("./utils");
+const { PLUGIN_PARAMETERS } = require("./plugin-parameters");
 
 // TODO: make the callee name configurable via .cloudinaryrc
 const CALLEE_NAME = "__buildCloudinaryUrl";
-
-// TODO: <host>
-// FIXME: cleanup properties that are not being used
-// http[s]://<host>/<transforms>/<prefix><assetName><postfix><resourceExtension>
-const PLUGIN_PARAMETERS = {
-  transforms: {
-    key: "transforms",
-    ord: 1,
-    placeholder: "TRANSFORM",
-    validate: () => true, // TODO: run validate methods for all expressions
-  },
-  postfix: {
-    key: "postfix",
-    ord: 4,
-  },
-  prefix: {
-    key: "prefix",
-    ord: 2,
-  },
-  resourceExtension: {
-    default: ".jpeg",
-    defaultType: "stringLiteral",
-    key: "resourceExtension",
-    ord: 5,
-  },
-  assetName: {
-    key: "assetName",
-    ord: 3,
-    placeholder: "ASSET_NAME",
-  },
-};
 
 /**
  * Takes the options injected by the client and
@@ -115,7 +85,9 @@ function processUrl(path) {
         if (allPluginParameters[param]) {
           return allPluginParameters[param];
         } else if (PLUGIN_PARAMETERS[param].default && PLUGIN_PARAMETERS[param].defaultType) {
-          return t[PLUGIN_PARAMETERS[param].defaultType](PLUGIN_PARAMETERS[param].default);
+          const babelConstructor = t[PLUGIN_PARAMETERS[param].defaultType];
+
+          return babelConstructor(PLUGIN_PARAMETERS[param].default);
         }
       })
       .filter(Boolean),
