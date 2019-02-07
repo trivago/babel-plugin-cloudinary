@@ -1,6 +1,6 @@
 const t = require("babel-types");
 const _get = require("lodash/get");
-const utils = require("./utils");
+const astHelpers = require("./ast-helpers");
 const { PLUGIN_PARAMETERS } = require("./plugin-parameters");
 const { CALLEE_NAME, getImageUrl } = require("./cloudinary-proxy");
 
@@ -46,7 +46,7 @@ function mapOptions(options) {
 function processUrl(path) {
   const [assetName, options] = path.node.arguments;
   const parameters = mapOptions(options);
-  const { expressions: staticBaseTransforms, mappings } = utils.replaceExpressions(
+  const { expressions: staticBaseTransforms, mappings } = astHelpers.replaceExpressions(
     parameters.transforms,
     PLUGIN_PARAMETERS.transforms.placeholder
   );
@@ -60,7 +60,7 @@ function processUrl(path) {
   const url = getImageUrl(PLUGIN_PARAMETERS.assetName.placeholder, staticBaseTransforms).split(
     PLUGIN_PARAMETERS.assetName.placeholder
   );
-  const { quasis: baseQuasis, expressions: baseExpressions } = utils.convertUrlIntoTemplateLiteral(
+  const { quasis: baseQuasis, expressions: baseExpressions } = astHelpers.convertUrlIntoTemplateLiteral(
     url[0],
     mappings,
     PLUGIN_PARAMETERS.transforms.placeholder
@@ -68,11 +68,11 @@ function processUrl(path) {
   // TODO: after doing the above we need to sort the quasis and expressions by ORD?? Still not clear this implementation
   const quasis = [
     ...baseQuasis,
-    utils.templateElement(""),
-    utils.templateElement(""),
-    utils.templateElement(""),
-    utils.templateElement(""),
-    ...[isStatic && utils.templateElement("")].filter(Boolean),
+    astHelpers.templateElement(""),
+    astHelpers.templateElement(""),
+    astHelpers.templateElement(""),
+    astHelpers.templateElement(""),
+    ...[isStatic && astHelpers.templateElement("")].filter(Boolean),
   ];
   const allPluginParameters = Object.assign({}, parameters, { assetName });
   const expressions = [
