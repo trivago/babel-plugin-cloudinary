@@ -5,38 +5,6 @@ const { PLUGIN_PARAMETERS } = require("./plugin-parameters");
 const { CALLEE_NAME, getImageUrl } = require("./cloudinary-proxy");
 
 /**
- * Takes the options injected by the client and
- * maps the options object properties (AST nodes)
- * to their respective PLUGIN_PARAMETER.
- * @param {Object} options - options that we which to map.
- * @returns {Object.<string, Object>} an object that maps parameters
- * keys to their respective node.
- */
-function mapOptions(options) {
-  if ((t.isIdentifier(options) && options.name === "undefined") || t.isNullLiteral(options)) {
-    return {};
-  } else if (!t.isObjectExpression(options)) {
-    throw new Error("options must be an object");
-  }
-
-  const properties = options.properties;
-
-  if (!properties || !properties.length) {
-    return [];
-  }
-
-  return properties.reduce((parameters, node) => {
-    const key = _get(node, "key.name");
-
-    if (PLUGIN_PARAMETERS[key]) {
-      parameters[key] = node.value;
-    }
-
-    return parameters;
-  }, {});
-}
-
-/**
  * Function that given a path that contains a call expression for
  * building a cloudinary URL performs the traverse and compiles the call expression
  * into the actual URL.
@@ -45,7 +13,7 @@ function mapOptions(options) {
  */
 function processUrl(path) {
   const [assetName, options] = path.node.arguments;
-  const parameters = mapOptions(options);
+  const parameters = astHelpers.mapOptions(options, PLUGIN_PARAMETERS);
   const { expressions: staticBaseTransforms, mappings } = astHelpers.replaceExpressions(
     parameters.transforms,
     PLUGIN_PARAMETERS.transforms.placeholder

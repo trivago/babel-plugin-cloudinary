@@ -7,6 +7,7 @@
  * functions could be shared here.
  */
 const t = require("babel-types");
+const _get = require("lodash/get");
 
 /**
  * Converts an url to a template literal that maps placeholders to variables/expressions to be resolved
@@ -39,6 +40,40 @@ function convertUrlIntoTemplateLiteral(url, mappings, placeholder) {
     quasis,
     expressions,
   };
+}
+
+/**
+ * Takes the options injected by the client and
+ * maps the options object properties (AST nodes)
+ * to their respective PLUGIN_PARAMETER.
+ * @param {Object} options - options to map from the plugin parameters.
+ * @param {Object} pluginParameters - all the parameters that are allowed
+ * to be mapped.
+ * @returns {Object.<string, Object>} an object that maps parameters
+ * keys to their respective node.
+ */
+function mapOptions(options, pluginParameters) {
+  if ((t.isIdentifier(options) && options.name === "undefined") || t.isNullLiteral(options)) {
+    return {};
+  } else if (!t.isObjectExpression(options)) {
+    throw new Error("options must be an object");
+  }
+
+  const properties = options.properties;
+
+  if (!properties || !properties.length) {
+    return [];
+  }
+
+  return properties.reduce((parameters, node) => {
+    const key = _get(node, "key.name");
+
+    if (pluginParameters[key]) {
+      parameters[key] = node.value;
+    }
+
+    return parameters;
+  }, {});
 }
 
 /**
@@ -138,7 +173,8 @@ function replaceExpressions(node, placeholder) {
 
 module.exports = {
   convertUrlIntoTemplateLiteral,
+  mapOptions,
   preval,
-  templateElement,
   replaceExpressions,
+  templateElement,
 };
