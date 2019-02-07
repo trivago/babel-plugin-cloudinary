@@ -2,9 +2,7 @@ const t = require("babel-types");
 const _get = require("lodash/get");
 const utils = require("./utils");
 const { PLUGIN_PARAMETERS } = require("./plugin-parameters");
-
-// TODO: make the callee name configurable via .cloudinaryrc
-const CALLEE_NAME = "__buildCloudinaryUrl";
+const { CALLEE_NAME, getImageUrl } = require("./cloudinary-proxy");
 
 /**
  * Takes the options injected by the client and
@@ -59,9 +57,9 @@ function processUrl(path) {
   const isStatic = !Object.keys(mappings).length;
 
   // URL generation
-  const url = utils
-    .getImageUrl(PLUGIN_PARAMETERS.assetName.placeholder, staticBaseTransforms)
-    .split(PLUGIN_PARAMETERS.assetName.placeholder);
+  const url = getImageUrl(PLUGIN_PARAMETERS.assetName.placeholder, staticBaseTransforms).split(
+    PLUGIN_PARAMETERS.assetName.placeholder
+  );
   const { quasis: baseQuasis, expressions: baseExpressions } = utils.convertUrlIntoTemplateLiteral(
     url[0],
     mappings,
