@@ -1,9 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`babel-plugin-cloudinary when \`options.transforms\` is not provided should compile to correct cloudinary URL template 1`] = `
+exports[`babel-plugin-cloudinary when \`options.transforms\` is not provided and all other options are provided should compile to correct cloudinary URL template 1`] = `
 "
 const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/'}\${'gallery/sand/'}\${'my-picture'}\${'_v10'}\${'.png'}\`;"
 `;
+
+exports[`babel-plugin-cloudinary when \`options.transforms\` is not provided and only \`prefix\` is provided should compile to correct cloudinary URL template 1`] = `"const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/'}\${'gallery/sand/'}\${'my-picture'}\${'.jpeg'}\${}\`;"`;
 
 exports[`babel-plugin-cloudinary when \`options\` are not provided being \`options\` an empty object should compile to correct cloudinary URL template 1`] = `"const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/'}\${'my-picture'}\${'.jpeg'}\${}\${}\`;"`;
 

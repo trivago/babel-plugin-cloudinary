@@ -63,19 +63,30 @@ describe("babel-plugin-cloudinary", () => {
   });
 
   describe("when `options.transforms` is not provided", () => {
-    it("should compile to correct cloudinary URL template", () => {
-      const input = `
-        const imageUrl = __buildCloudinaryUrl(
-          'my-picture', {
-            prefix: 'gallery/sand/',
-            postfix: '_v10',
-            resourceExtension: '.png',
-          }
-      );`;
+    describe("and all other options are provided", () => {
+      it("should compile to correct cloudinary URL template", () => {
+        const input = `
+          const imageUrl = __buildCloudinaryUrl(
+            'my-picture', {
+              prefix: 'gallery/sand/',
+              postfix: '_v10',
+              resourceExtension: '.png',
+            }
+        );`;
 
-      const { code } = babel.transform(input, { plugins: [plugin] });
+        const { code } = babel.transform(input, { plugins: [plugin] });
 
-      expect(code).toMatchSnapshot();
+        expect(code).toMatchSnapshot();
+      });
+    });
+
+    describe("and only `prefix` is provided", () => {
+      it("should compile to correct cloudinary URL template", () => {
+        const input = "const imageUrl = __buildCloudinaryUrl('my-picture', { prefix: 'gallery/sand/' });";
+        const { code } = babel.transform(input, { plugins: [plugin] });
+
+        expect(code).toMatchSnapshot();
+      });
     });
   });
 
