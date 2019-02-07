@@ -13,6 +13,7 @@ exports[`babel-plugin-cloudinary when \`options\` are not provided being \`optio
 
 exports[`babel-plugin-cloudinary when all parameters are defined and all parameters are dynamic (variables, function calls and conditionals) should compile to correct cloudinary URL template 1`] = `
 "
+const myPicture = 'my-picture';
 const isMobile = false;
 const getWidth = () => 200;
 const getHeight = () => 300;
@@ -22,7 +23,7 @@ const post = '_v10';
 const extMobile = '.png';
 const extDesktop = '.jpeg';
 
-const imageUrl = \`https://res.cloudinary.com/trivago/image/upload/c_fill,h_\${getHeight()},q_\${imageQuality},t_crop,w_\${getWidth()}/\${pref}\${'my-picture'}\${post}\${isMobile ? extMobile : extDesktop}\`;"
+const imageUrl = \`https://res.cloudinary.com/trivago/image/upload/c_fill,h_\${getHeight()},q_\${imageQuality},t_crop,w_\${getWidth()}/\${pref}\${myPicture}\${post}\${isMobile ? extMobile : extDesktop}\`;"
 `;
 
 exports[`babel-plugin-cloudinary when all parameters are defined and all parameters are static should compile to correct cloudinary URL template 1`] = `

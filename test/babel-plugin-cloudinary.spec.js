@@ -5,8 +5,8 @@ describe("babel-plugin-cloudinary", () => {
   describe("when all parameters are defined", () => {
     describe("and all parameters are dynamic (variables, function calls and conditionals)", () => {
       it("should compile to correct cloudinary URL template", () => {
-        // FIXME: picture name must be a variable as well!!!
         const input = `
+          const myPicture = 'my-picture';
           const isMobile = false;
           const getWidth = () => 200;
           const getHeight = () => 300;
@@ -17,7 +17,7 @@ describe("babel-plugin-cloudinary", () => {
           const extDesktop = '.jpeg';
 
           const imageUrl = __buildCloudinaryUrl(
-            'my-picture', {
+            myPicture, {
               transformation: {
                 transformation: 'crop',
                 crop: 'fill',
