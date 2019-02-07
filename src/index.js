@@ -1,4 +1,5 @@
 const t = require("babel-types");
+const _get = require("lodash/get");
 const utils = require("./utils");
 const { PLUGIN_PARAMETERS } = require("./plugin-parameters");
 
@@ -27,8 +28,7 @@ function mapOptions(options) {
   }
 
   return properties.reduce((parameters, node) => {
-    // FIXME: code not safe `name` retrieval
-    const key = node.key.name;
+    const key = _get(node, "key.name");
 
     if (PLUGIN_PARAMETERS[key]) {
       parameters[key] = node.value;
@@ -104,7 +104,7 @@ module.exports = function babelPluginCloudinary() {
   return {
     visitor: {
       CallExpression(path, options) {
-        const calleeName = path && path.node && path.node.callee && path.node.callee.name;
+        const calleeName = _get(path, "node.callee.name");
 
         if (calleeName && calleeName === CALLEE_NAME) {
           processUrl(path, options);
