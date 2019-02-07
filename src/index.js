@@ -35,13 +35,14 @@ const PLUGIN_PARAMETERS = {
 };
 
 /**
- * Should take all the options (PLUGIN_PARAMETERS) and return
- * all the pre-evaluated options.
- * @param {Object} options - options that we which to preval.
+ * Takes the options injected by the client and
+ * maps the options object properties (AST nodes)
+ * to their respective PLUGIN_PARAMETER.
+ * @param {Object} options - options that we which to map.
  * @returns {Object.<string, Object>} an object that maps parameters
  * keys to their respective node.
  */
-function prevalParameters(options) {
+function mapOptions(options) {
   if (!t.isObjectExpression(options)) {
     throw new Error("options must be an object");
   }
@@ -74,7 +75,7 @@ function prevalParameters(options) {
 function processUrl(path) {
   const [assetName, options] = path.node.arguments;
   // const { transformation: transforms } = options;
-  const parameters = prevalParameters(options);
+  const parameters = mapOptions(options);
   // TODO: refactor call to utils.replaceExpressions into something that will support all PARAMETERS
   // FIXME: what about when parameters.transformation is not defined?
   const { expressions: staticBaseTransforms, mappings } = utils.replaceExpressions(
