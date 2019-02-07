@@ -45,7 +45,9 @@ const PLUGIN_PARAMETERS = {
  * keys to their respective node.
  */
 function mapOptions(options) {
-  if (!t.isObjectExpression(options)) {
+  if ((t.isIdentifier(options) && options.name === "undefined") || t.isNullLiteral(options)) {
+    return {};
+  } else if (!t.isObjectExpression(options)) {
     throw new Error("options must be an object");
   }
 

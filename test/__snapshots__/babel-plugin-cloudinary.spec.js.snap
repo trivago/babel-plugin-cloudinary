@@ -1,9 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[` 1`] = `"const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/'}\${'my-picture'}\${'.jpeg'}\${}\${}\`;"`;
+
+exports[` 2`] = `"const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/'}\${'my-picture'}\${'.jpeg'}\${}\${}\`;"`;
+
 exports[`babel-plugin-cloudinary when \`options.transformations\` is not provided should compile to correct cloudinary URL template 1`] = `
 "
 const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/'}\${'gallery/sand/'}\${'my-picture'}\${'_v10'}\${'.png'}\`;"
 `;
+
+exports[`babel-plugin-cloudinary when \`options\` are not provided being \`options\` an empty object should compile to correct cloudinary URL template 1`] = `"const imageUrl = \`\${'https://res.cloudinary.com/trivago/image/upload/'}\${'my-picture'}\${'.jpeg'}\${}\${}\`;"`;
 
 exports[`babel-plugin-cloudinary when all parameters are defined and all parameters are dynamic (variables, function calls and conditionals) should compile to correct cloudinary URL template 1`] = `
 "
