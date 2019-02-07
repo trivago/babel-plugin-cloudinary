@@ -5,6 +5,7 @@ describe("babel-plugin-cloudinary", () => {
   describe("when all parameters are defined", () => {
     describe("and all parameters are dynamic (variables, function calls and conditionals)", () => {
       it("should compile to correct cloudinary URL template", () => {
+        // FIXME: picture name must be a variable as well!!!
         const input = `
           const isMobile = false;
           const getWidth = () => 200;
@@ -110,19 +111,45 @@ describe("babel-plugin-cloudinary", () => {
     });
 
     describe("being `options` undefined", () => {
-      const input = "const imageUrl = __buildCloudinaryUrl('my-picture', undefined);";
-      const { code } = babel.transform(input, { plugins: [plugin] });
+      it("should compile to correct cloudinary URL template", () => {
+        const input = "const imageUrl = __buildCloudinaryUrl('my-picture', undefined);";
+        const { code } = babel.transform(input, { plugins: [plugin] });
 
-      expect(code).toMatchSnapshot();
+        expect(code).toMatchSnapshot();
+      });
     });
 
     describe("being `options` null", () => {
-      const input = "const imageUrl = __buildCloudinaryUrl('my-picture', null);";
+      it("should compile to correct cloudinary URL template", () => {
+        const input = "const imageUrl = __buildCloudinaryUrl('my-picture', null);";
+        const { code } = babel.transform(input, { plugins: [plugin] });
+
+        expect(code).toMatchSnapshot();
+      });
+    });
+  });
+
+  describe("when multi-level `options.transformations` are provided", () => {
+    it("should compile to correct cloudinary URL template", () => {
+      const input = `
+          const isMobile = false;
+          const bc = getBackgroundColor();
+          const clr = 'lightblue';
+
+          __buildCloudinaryUrl('my-picture', {
+            transformation: {
+              transformation: [
+                  { effect: 'cartoonify' },
+                  { radius: 'max' },
+                  { effect: isMobile ? 'outline:100' : 'outline:200', color: clr },
+                  { background: bc },
+                  { height: 300, crop: getScale() }
+              ]
+            }
+          });`;
       const { code } = babel.transform(input, { plugins: [plugin] });
 
       expect(code).toMatchSnapshot();
     });
   });
-
-  // TODO: when we have multilevel transforms!
 });
