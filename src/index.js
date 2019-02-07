@@ -6,11 +6,10 @@ const CALLEE_NAME = "__buildCloudinaryUrl";
 
 // TODO: <host>
 // FIXME: cleanup properties that are not being used
-// http[s]://<host>/<transformations>/<prefix><assetName><postfix><resourceExtension>
+// http[s]://<host>/<transforms>/<prefix><assetName><postfix><resourceExtension>
 const PLUGIN_PARAMETERS = {
-  // FIXME: rename transformation -> transformation[s]
-  transformation: {
-    key: "transformation",
+  transforms: {
+    key: "transforms",
     ord: 1,
     placeholder: "TRANSFORM",
     validate: () => true, // TODO: run validate methods for all expressions
@@ -80,12 +79,12 @@ function processUrl(path) {
   const [assetName, options] = path.node.arguments;
   const parameters = mapOptions(options);
   const { expressions: staticBaseTransforms, mappings } = utils.replaceExpressions(
-    parameters.transformation,
-    PLUGIN_PARAMETERS.transformation.placeholder
+    parameters.transforms,
+    PLUGIN_PARAMETERS.transforms.placeholder
   );
 
   // FIXME: avoid deletion or make it more clear
-  delete parameters.transformation;
+  delete parameters.transforms;
   // FIXME: get rid of isStatic when refactoring the build of quasis
   const isStatic = !Object.keys(mappings).length;
 
@@ -96,7 +95,7 @@ function processUrl(path) {
   const { quasis: baseQuasis, expressions: baseExpressions } = utils.convertUrlIntoTemplateLiteral(
     url[0],
     mappings,
-    PLUGIN_PARAMETERS.transformation.placeholder
+    PLUGIN_PARAMETERS.transforms.placeholder
   );
   // TODO: after doing the above we need to sort the quasis and expressions by ORD?? Still not clear this implementation
   const quasis = [

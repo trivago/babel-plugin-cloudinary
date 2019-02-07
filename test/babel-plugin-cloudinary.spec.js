@@ -18,7 +18,7 @@ describe("babel-plugin-cloudinary", () => {
 
           const imageUrl = __buildCloudinaryUrl(
             myPicture, {
-              transformation: {
+              transforms: {
                 transformation: 'crop',
                 crop: 'fill',
                 quality: imageQuality,
@@ -42,7 +42,7 @@ describe("babel-plugin-cloudinary", () => {
         const input = `
           const imageUrl = __buildCloudinaryUrl(
             'my-picture', {
-              transformation: {
+              transforms: {
                 transformation: 'crop',
                 crop: 'fill',
                 quality: 'auto:good',
@@ -62,7 +62,7 @@ describe("babel-plugin-cloudinary", () => {
     });
   });
 
-  describe("when `options.transformations` is not provided", () => {
+  describe("when `options.transforms` is not provided", () => {
     it("should compile to correct cloudinary URL template", () => {
       const input = `
         const imageUrl = __buildCloudinaryUrl(
@@ -79,12 +79,12 @@ describe("babel-plugin-cloudinary", () => {
     });
   });
 
-  describe("when only `options.transformations` is provided", () => {
+  describe("when only `options.transforms` is provided", () => {
     it("should compile to correct cloudinary URL template", () => {
       const input = `
           const imageUrl = __buildCloudinaryUrl(
             'my-picture', {
-              transformation: {
+              transforms: {
                 transformation: 'crop',
                 crop: 'fill',
                 quality: 'auto:good',
@@ -129,7 +129,7 @@ describe("babel-plugin-cloudinary", () => {
     });
   });
 
-  describe("when multi-level `options.transformations` are provided", () => {
+  describe("when multi-level `options.transforms` are provided", () => {
     it("should compile to correct cloudinary URL template", () => {
       const input = `
           const isMobile = false;
@@ -137,7 +137,7 @@ describe("babel-plugin-cloudinary", () => {
           const clr = 'lightblue';
 
           __buildCloudinaryUrl('my-picture', {
-            transformation: {
+            transforms: {
               transformation: [
                   { effect: 'cartoonify' },
                   { radius: 'max' },
