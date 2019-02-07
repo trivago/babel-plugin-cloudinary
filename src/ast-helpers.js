@@ -16,11 +16,8 @@ const _get = require("lodash/get");
  * @param {Object} mappings - an object that maps placeholders on the url to the variable/expression
  * to be resolved at runtime.
  * @param {string} placeholder - the placeholder to match mappings against the url.
- * @returns {Object} an object containing the two composing blocks of a [templateLiteral](https://babeljs.io/docs/en/babel-types#templateliteral).
- * @example
- * const url = "https://res.cloudinary.com/trv/image/upload/c_fill,d_dummy.jpeg,f_auto,h_REPLACE1,q_auto:eco,w_REPLACE2/"
- * const templateLiteral = convertUrlIntoTemplateLiteral(url);
- * // templateLiteral > `https://res.cloudinary.com/trv/image/upload/c_fill,d_dummy.jpeg,f_auto,h_${width},q_auto:eco,w_${height}/`
+ * @returns {Object} an object containing the two composing blocks (quasis and literals) of a
+ * [templateLiteral](https://babeljs.io/docs/en/babel-types#templateliteral).
  */
 function convertUrlIntoTemplateLiteral(url, mappings, placeholder) {
   const isStatic = !Object.keys(mappings).length;
