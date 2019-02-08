@@ -2,7 +2,7 @@ const t = require("babel-types");
 const _get = require("lodash/get");
 const astHelpers = require("./ast-helpers");
 const { PLUGIN_PARAMETERS } = require("./plugin-parameters");
-const { CALLEE_NAME, getImageUrl } = require("./cloudinary-proxy");
+const { CALLEE_NAME, getBaseImageUrl } = require("./cloudinary-proxy");
 
 /**
  * Function that given a path that contains a call expression for
@@ -25,11 +25,9 @@ function processUrl(path) {
   const isStatic = !Object.keys(mappings).length;
 
   // URL generation
-  const url = getImageUrl(PLUGIN_PARAMETERS.assetName.placeholder, staticBaseTransforms).split(
-    PLUGIN_PARAMETERS.assetName.placeholder
-  );
+  const url = getBaseImageUrl(PLUGIN_PARAMETERS.assetName.placeholder, staticBaseTransforms);
   const { quasis: baseQuasis, expressions: baseExpressions } = astHelpers.convertUrlIntoTemplateLiteral(
-    url[0],
+    url,
     mappings,
     PLUGIN_PARAMETERS.transforms.placeholder
   );

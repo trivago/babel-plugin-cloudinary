@@ -28,20 +28,20 @@ const IMG_HOST = `//${runConfig.host}`;
  * This method invokes the cloudinary core to build the asset URL.
  * @param {string} assetName - name of the asset.
  * @param {Object} transforms - plain object that contains the cloudinary transformations.
- * @returns {string} image URL for the provided assetName.
+ * @returns {string} base image URL for the provided assetName.
  */
-function getImageUrl(assetName, transforms) {
-  const url = cl.url(assetName, transforms);
+function getBaseImageUrl(assetName, transforms) {
+  let url = cl.url(assetName, transforms);
 
   if (runConfig.overrideBaseUrl) {
     // FIXME: not working
-    return url.replace(BASE_URL_PLACEHOLDER, IMG_HOST);
+    url = url.replace(BASE_URL_PLACEHOLDER, IMG_HOST);
   }
 
-  return url;
+  return url.split(assetName)[0];
 }
 
 module.exports = {
   CALLEE_NAME,
-  getImageUrl,
+  getBaseImageUrl,
 };
