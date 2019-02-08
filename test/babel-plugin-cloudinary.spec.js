@@ -1,6 +1,18 @@
 const babel = require("babel-core");
 const plugin = require("../src");
 
+jest.mock(
+  "../.cloudinaryrc",
+  () => ({
+    native: {
+      // eslint-disable-next-line
+      cloud_name: "trivago",
+      secure: true,
+    },
+  }),
+  { virtual: true }
+);
+
 describe("babel-plugin-cloudinary", () => {
   describe("when all parameters are defined", () => {
     describe("and all parameters are dynamic (variables, function calls and conditionals)", () => {
