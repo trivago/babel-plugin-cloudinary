@@ -25,7 +25,7 @@ const post = '_v10';
 const extMobile = '.png';
 const extDesktop = '.jpeg';
 
-const imageUrl = \`https://res.cloudinary.com/trivago/image/upload/c_fill,h_\${getHeight()},q_\${imageQuality},t_crop,w_\${getWidth()}/\${pref}\${myPicture}\${post}\${isMobile ? extMobile : extDesktop}\`;"
+const imageUrl = \`https://res.cloudinary.com/trivago/image/upload/c_fill,h_\${getHeight()},q_\${imageQuality},t_crop,w_\${getWidth()}/\${pref}\${myPicture}\${post}\${isMobile ? extMobile : extDesktop}\${}\`;"
 `;
 
 exports[`babel-plugin-cloudinary when all parameters are defined and all parameters are static should compile to correct cloudinary URL template 1`] = `
@@ -39,7 +39,7 @@ const isMobile = false;
 const bc = getBackgroundColor();
 const clr = 'lightblue';
 
-\`https://res.cloudinary.com/trivago/image/upload/e_cartoonify/r_max/co_\${clr},e_\${isMobile ? 'outline:100' : 'outline:200'}/b_\${bc}/c_\${getScale()},h_300/\${'my-picture'}\${'.jpeg'}\${}\${}\`;"
+\`https://res.cloudinary.com/trivago/image/upload/e_cartoonify/r_max/co_\${clr},e_\${isMobile ? 'outline:100' : 'outline:200'}/b_\${bc}/c_\${getScale()},h_300/\${'my-picture'}\${'.jpeg'}\${}\${}\${}\`;"
 `;
 
 exports[`babel-plugin-cloudinary when only \`options.transforms\` is provided should compile to correct cloudinary URL template 1`] = `

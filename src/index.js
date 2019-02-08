@@ -21,8 +21,6 @@ function processUrl(path) {
 
   // FIXME: avoid deletion or make it more clear
   delete parameters.transforms;
-  // FIXME: get rid of isStatic when refactoring the build of quasis
-  const isStatic = !Object.keys(mappings).length;
 
   // URL generation
   const url = getBaseImageUrl(PLUGIN_PARAMETERS.assetName.placeholder, staticBaseTransforms);
@@ -32,30 +30,28 @@ function processUrl(path) {
     PLUGIN_PARAMETERS.transforms.placeholder
   );
   // TODO: after doing the above we need to sort the quasis and expressions by ORD?? Still not clear this implementation
-  const quasis = [
-    ...baseQuasis,
-    astHelpers.templateElement(""),
-    astHelpers.templateElement(""),
-    astHelpers.templateElement(""),
-    astHelpers.templateElement(""),
-    ...[isStatic && astHelpers.templateElement("")].filter(Boolean),
-  ];
   const allPluginParameters = Object.assign({}, parameters, { assetName });
-  const expressions = [
-    ...baseExpressions,
-    ...Object.keys(PLUGIN_PARAMETERS)
-      .sort((paramA, paramB) => PLUGIN_PARAMETERS[paramA].ord > PLUGIN_PARAMETERS[paramB].ord)
-      .map(param => {
-        if (allPluginParameters[param]) {
-          return allPluginParameters[param];
-        } else if (PLUGIN_PARAMETERS[param].default && PLUGIN_PARAMETERS[param].defaultType) {
-          const babelConstructor = t[PLUGIN_PARAMETERS[param].defaultType];
+  // TODO: move to method ??buildComplementaryExpressions (naming!!)
+  const extraExpressions = Object.keys(PLUGIN_PARAMETERS)
+    .sort((paramA, paramB) => PLUGIN_PARAMETERS[paramA].ord > PLUGIN_PARAMETERS[paramB].ord)
+    .map(param => {
+      if (allPluginParameters[param]) {
+        return allPluginParameters[param];
+      } else if (PLUGIN_PARAMETERS[param].default && PLUGIN_PARAMETERS[param].defaultType) {
+        const babelConstructor = t[PLUGIN_PARAMETERS[param].defaultType];
 
-          return babelConstructor(PLUGIN_PARAMETERS[param].default);
-        }
-      })
-      .filter(Boolean),
-  ];
+        return babelConstructor(PLUGIN_PARAMETERS[param].default);
+      }
+    });
+
+  const expressions = [...baseExpressions, ...extraExpressions.filter(Boolean)];
+  // FAILS, but is working!
+  // babel-plugin-cloudinary › when all parameters are defined › and all parameters are dynamic (variables, function calls and conditionals) › should compile to correct cloudinary URL template
+  // TODO: move to method buildPlaceholderQuasisForExpressions
+  // ...${isMobile ? extMobile : extDesktop}${}`;
+  // ...${isMobile ? extMobile : extDesktop}`;"
+  // FIXME: Find a way to remove overhead on the empty placeholders ${}
+  const quasis = [...baseQuasis, ...Object.keys(extraExpressions).map(() => astHelpers.templateElement(""))];
 
   path.replaceWith(t.expressionStatement(t.templateLiteral(quasis, expressions)));
 }
