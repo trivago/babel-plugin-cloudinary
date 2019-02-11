@@ -45,8 +45,6 @@ function processUrl(path) {
     });
 
   const expressions = [...baseExpressions, ...extraExpressions.filter(Boolean)];
-  // FAILS, but is working!
-  // babel-plugin-cloudinary › when all parameters are defined › and all parameters are dynamic (variables, function calls and conditionals) › should compile to correct cloudinary URL template
   // TODO: move to method buildPlaceholderQuasisForExpressions
   // ...${isMobile ? extMobile : extDesktop}${}`;
   // ...${isMobile ? extMobile : extDesktop}`;"

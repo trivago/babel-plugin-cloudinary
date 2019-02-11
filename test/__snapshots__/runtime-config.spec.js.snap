@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`runtime-config when \`overrideBaseUrl\` is set to true and \`host\` is provided should override the base URL with the provided host 1`] = `"const imageUrl = \`\${'https://trivago.images.com/'}\${'my-picture'}\${'.jpeg'}\${}\${}\`;"`;

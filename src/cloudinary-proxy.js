@@ -33,6 +33,10 @@ function getBaseImageUrl(assetName, transforms) {
   let url = cl.url(assetName, transforms);
 
   if (runConfig.overrideBaseUrl) {
+    if (!runConfig.host) {
+      throw new Error("when activating `overrideBaseUrl` a `host` must be provided");
+    }
+
     url = url.replace(BASE_URL_PLACEHOLDER, runConfig.host);
   }
 
