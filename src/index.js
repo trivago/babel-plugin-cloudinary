@@ -26,7 +26,6 @@ function processUrl(path) {
     PLUGIN_PARAMETERS.transforms.placeholder
   );
 
-  // FIXME: avoid deletion or make it more clear?
   delete parameters.transforms;
 
   const url = getBaseImageUrl(PLUGIN_PARAMETERS.assetName.placeholder, staticBaseTransforms);
@@ -48,7 +47,7 @@ function processUrl(path) {
       }
     });
   const expressions = [...baseExpressions, ...extraExpressions.filter(Boolean)];
-  // FIXME: Find a way to remove overhead on the empty placeholders ${} e.g. "test/fixtures/only-transforms-provided"
+  // FIXME: find a way to remove overhead on the empty placeholders (e.g. test/fixtures/only-transforms-provided)
   const quasis = [...baseQuasis, ...Object.keys(extraExpressions).map(() => astHelpers.templateElement(""))];
 
   path.replaceWith(t.expressionStatement(t.templateLiteral(quasis, expressions)));
