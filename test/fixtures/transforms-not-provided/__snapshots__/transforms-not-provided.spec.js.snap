@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transforms-not-provided 1`] = `"const imageUrl = \`\${\\"https://res.cloudinary.com/trivago/image/upload/\\"}\${\\"gallery/sand/\\"}\${\\"my-picture\\"}\${\\"_v10\\"}\${\\".png\\"}\`;"`;
