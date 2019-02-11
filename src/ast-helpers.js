@@ -1,10 +1,8 @@
 /**
  * @module utils
  * @description
- * This module serves as a facade to the cloudinary core
- * and exposes some generic operations that use cloudinary
- * core functionality. Also some shared static evaluation
- * functions could be shared here.
+ * This module shares several utility functions to manipulate
+ * AST nodes.
  */
 const t = require("babel-types");
 const _get = require("lodash/get");
@@ -42,7 +40,7 @@ function convertUrlIntoTemplateLiteral(url, mappings, placeholder) {
 /**
  * Takes the options injected by the client and
  * maps the options object properties (AST nodes)
- * to their respective PLUGIN_PARAMETER.
+ * to their respective plugin parameter key.
  * @param {Object} options - options to map from the plugin parameters.
  * @param {Object} pluginParameters - all the parameters that are allowed
  * to be mapped.
@@ -99,8 +97,8 @@ function preval(node) {
 }
 
 /**
- * Creates a TemplateElement.
- * https://github.com/babel/babel/blob/master/packages/babel-parser/ast/spec.md#templateelement
+ * Creates a [TemplateElement]
+ * (https://github.com/babel/babel/blob/master/packages/babel-parser/ast/spec.md#templateelement).
  * @param {string} str - string to fill in templateElement.
  * @returns {Object} a TemplateElement node.
  */
@@ -112,20 +110,22 @@ function templateElement(str) {
 }
 
 /**
- * Takes a transform object that contains dynamic properties (i.e. determined at runtime)
- * and unfolds them into returning a plain object where dynamic properties are replaced
+ * Takes a node that contains dynamic properties and unfolds
+ * them into a plain object where dynamic properties are replaced
  * by a placeholder.
- * @param {Object} node - dynamic transforms to unfold.
+ * @param {Object} node - dynamic node to unfold.
  * @param {string} placeholder - a placeholder that will replace variables/expressions
- * in unfolded transform.
- * @returns {Object} contains a plain object that was generated from the
- * original transform and a mappings object that keeps track of the original
- * dynamic variables/expressions mapping them to the respective placeholder.
+ * in unfolded node.
+ * @returns {Object} wraps two objects:
+ * - rawNode - object that contains original properties of the input node
+ * but the dynamic values (expressions) are replaced by the placeholder.
+ * - mappings - object that keeps track of the original
+ * dynamic variables/expressions mapped by the respective placeholder.
  */
 function replaceExpressions(node, placeholder) {
   if (!node) {
     return {
-      expressions: {},
+      rawNode: {},
       mappings: {},
     };
   }
@@ -160,10 +160,10 @@ function replaceExpressions(node, placeholder) {
     }
   };
 
-  const expressions = _replaceExpressions(node);
+  const rawNode = _replaceExpressions(node);
 
   return {
-    expressions,
+    rawNode,
     mappings,
   };
 }

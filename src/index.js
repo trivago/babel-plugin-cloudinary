@@ -14,7 +14,7 @@ const { CALLEE_NAME, getBaseImageUrl } = require("./cloudinary-proxy");
 function processUrl(path) {
   const [assetName, options] = path.node.arguments;
   const parameters = astHelpers.mapOptions(options, PLUGIN_PARAMETERS);
-  const { expressions: staticBaseTransforms, mappings } = astHelpers.replaceExpressions(
+  const { rawNode: staticBaseTransforms, mappings } = astHelpers.replaceExpressions(
     parameters.transforms,
     PLUGIN_PARAMETERS.transforms.placeholder
   );
