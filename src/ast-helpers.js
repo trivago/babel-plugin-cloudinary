@@ -38,6 +38,19 @@ function convertUrlIntoTemplateLiteral(url, mappings, placeholder) {
 }
 
 /**
+ * This function filters out useless expressions, these include:
+ * - nullLiteral
+ * - undefined
+ * @param {Array.<Object>} expressions - array of expressions to filter.
+ * @returns {Array.<Object>} returns filtered expressions.
+ */
+function filterExpressions(expressions = []) {
+  return expressions
+    .filter(Boolean)
+    .filter(expression => !t.isNullLiteral(expression) && expression.name !== "undefined");
+}
+
+/**
  * Takes the options injected by the client and
  * maps the options object properties (AST nodes)
  * to their respective plugin parameter key.
@@ -63,31 +76,6 @@ function mapOptions(options, pluginParameters) {
 
     return parameters;
   }, {});
-}
-
-/**
- * Partially pre-evaluates expressions.
- * Requirements:
- *   - Expressions must be static in nature (no variables).
- *   - Understands objects, arrays and literals.
- * @param {Object} node - target to pre-evaluate.
- * @returns {*} a literal that results form the node.
- * pre-evaluation. According to babel `isLiteral` implementation
- * a literal can be on of: string, number, null, boolean, RegExp, Template, BigInt.
- */
-function preval(node) {
-  if (t.isArrayExpression(node)) {
-    return node.elements.map(preval);
-  } else if (t.isObjectExpression(node)) {
-    return node.properties.reduce((obj, prop) => {
-      obj[prop.key.name || prop.key.value] = preval(prop.value);
-      return obj;
-    }, {});
-  } else if (t.isLiteral(node)) {
-    return node.value;
-  } else {
-    throw new Error(`[preval] Can't preval ${JSON.stringify(node)}`);
-  }
 }
 
 /**
@@ -164,8 +152,8 @@ function replaceExpressions(node, placeholder) {
 
 module.exports = {
   convertUrlIntoTemplateLiteral,
+  filterExpressions,
   mapOptions,
-  preval,
   replaceExpressions,
   templateElement,
 };

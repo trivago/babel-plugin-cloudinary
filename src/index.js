@@ -49,7 +49,7 @@ function processUrl(path) {
         return babelConstructor(PLUGIN_PARAMETERS[param].default);
       }
     });
-  const expressions = [...baseExpressions, ...extraExpressions.filter(Boolean)];
+  const expressions = [...baseExpressions, ...astHelpers.filterExpressions(extraExpressions)];
   // FIXME: find a way to remove overhead on the empty placeholders (e.g. test/fixtures/only-transforms-provided)
   const quasis = [...baseQuasis, ...Object.keys(extraExpressions).map(() => astHelpers.templateElement(""))];
 

@@ -6,4 +6,6 @@ const imageUrl = __buildCloudinaryUrl("my-picture", {
     width: 200,
     height: 300,
   },
+  prefix: null,
+  postfix: undefined,
 });
