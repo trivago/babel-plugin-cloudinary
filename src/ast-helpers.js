@@ -45,9 +45,9 @@ function convertUrlIntoTemplateLiteral(url, mappings, placeholder) {
  * @returns {Array.<Object>} returns filtered expressions.
  */
 function filterExpressions(expressions = []) {
-  return expressions
-    .filter(Boolean)
-    .filter(expression => !t.isNullLiteral(expression) && expression.name !== "undefined");
+  return expressions.filter(
+    expression => expression && !t.isNullLiteral(expression) && expression.name !== "undefined"
+  );
 }
 
 /**
