@@ -15,7 +15,6 @@ if (!_has(runConfig, "native.cloud_name")) {
   throw new Error("You need to provide a **native** object with the mandatory **cloud_name** field");
 }
 
-// TODO: if the user has runConfig.overrideBaseUrl a runConfig.host must be provided!
 // TODO: make the callee name configurable via .cloudinaryrc
 const CALLEE_NAME = "__buildCloudinaryUrl";
 const cl = new cloudinary.Cloudinary(runConfig.native);

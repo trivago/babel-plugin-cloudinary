@@ -8,7 +8,7 @@
 const t = require("babel-types");
 const _get = require("lodash/get");
 const astHelpers = require("./ast-helpers");
-const { PLUGIN_PARAMETERS } = require("./plugin-parameters");
+const { PLUGIN_PARAMETERS, validate } = require("./plugin-parameters");
 const { CALLEE_NAME, getBaseImageUrl } = require("./cloudinary-proxy");
 
 /**
@@ -20,6 +20,9 @@ const { CALLEE_NAME, getBaseImageUrl } = require("./cloudinary-proxy");
  */
 function processUrl(path) {
   const [assetName, options] = path.node.arguments;
+
+  validate(assetName, options);
+
   const parameters = astHelpers.mapOptions(options, PLUGIN_PARAMETERS);
   const { rawNode: staticBaseTransforms, mappings } = astHelpers.replaceExpressions(
     parameters.transforms,

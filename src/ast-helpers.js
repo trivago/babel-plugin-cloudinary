@@ -48,12 +48,6 @@ function convertUrlIntoTemplateLiteral(url, mappings, placeholder) {
  * keys to their respective node.
  */
 function mapOptions(options, pluginParameters) {
-  if ((t.isIdentifier(options) && options.name === "undefined") || t.isNullLiteral(options)) {
-    return {};
-  } else if (!t.isObjectExpression(options)) {
-    throw new Error("options must be an object");
-  }
-
   const properties = options.properties;
 
   if (!properties || !properties.length) {

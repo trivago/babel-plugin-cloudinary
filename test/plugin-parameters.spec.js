@@ -7,7 +7,9 @@ describe("plugin-parameters", () => {
 
     Object.keys(PLUGIN_PARAMETERS).forEach(param => {
       mandatory.forEach(mandatoryProp => {
-        expect(PLUGIN_PARAMETERS[param].hasOwnProperty(mandatoryProp)).toBe(true);
+        if (typeof PLUGIN_PARAMETERS[param] === "object") {
+          expect(PLUGIN_PARAMETERS[param].hasOwnProperty(mandatoryProp)).toBe(true);
+        }
       });
     });
   });
