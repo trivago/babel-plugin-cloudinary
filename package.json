@@ -64,6 +64,7 @@
     "cloudinary-core": "^2.6.2"
   },
   "dependencies": {
+    "babel-types": "^6.26.0",
     "lodash": "^4.17.11"
   }
 }
