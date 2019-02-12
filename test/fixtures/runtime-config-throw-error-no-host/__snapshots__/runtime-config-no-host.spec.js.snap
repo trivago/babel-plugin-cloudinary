@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`runtime-config-no-host 1`] = `[Error: unknown: when activating \`overrideBaseUrl\` a \`host\` must be provided]`;
