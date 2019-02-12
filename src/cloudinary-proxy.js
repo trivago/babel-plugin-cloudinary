@@ -7,9 +7,9 @@
  */
 const _has = require("lodash/has");
 const cloudinary = require("cloudinary-core");
+
 // https://cloudinary.com/documentation/solution_overview#configuration_parameters
-// FIXME: this will be inside node_modules, require needs to resolve to the root of the project
-const runConfig = require("../.cloudinaryrc");
+const runConfig = require(`${process.env.INIT_CWD}/.cloudinaryrc`);
 
 if (!_has(runConfig, "native.cloud_name")) {
   throw new Error("You need to provide a **native** object with the mandatory **cloud_name** field");
