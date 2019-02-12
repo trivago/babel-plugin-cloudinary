@@ -46,7 +46,24 @@ const PLUGIN_PARAMETERS = {
     key: "assetName",
     ord: 3,
     placeholder: "ASSET_NAME",
-    validate: assetName => commonValidator("assetName", assetName),
+    validate: assetName => {
+      if (assetName.name === "undefined" || t.isNullLiteral(assetName)) {
+        throw new Error("assetName is mandatory");
+      }
+
+      if (
+        !(
+          t.isIdentifier(assetName) ||
+          t.isStringLiteral(assetName) ||
+          t.isConditionalExpression(assetName) ||
+          t.isCallExpression(assetName)
+        )
+      ) {
+        throw new Error("assetName must be one of: identifier, stringLiteral, conditionalExpression or callExpression");
+      }
+
+      return true;
+    },
   },
 };
 
@@ -89,7 +106,10 @@ function validate(assetNameNode, optionsNode) {
     throw new Error("options must be an object");
   }
 
-  const properties = [..._get(optionsNode, "properties", []), assetNameNode];
+  const properties = [
+    ..._get(optionsNode, "properties", []),
+    t.objectProperty(t.identifier(PLUGIN_PARAMETERS.assetName.key), assetNameNode),
+  ];
 
   properties.forEach(objectPropertyNode => {
     const key = _get(objectPropertyNode, "key.name");
