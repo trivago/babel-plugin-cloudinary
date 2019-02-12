@@ -49,9 +49,17 @@ function processUrl(path) {
         return babelConstructor(PLUGIN_PARAMETERS[param].default);
       }
     });
-  const expressions = [...baseExpressions, ...astHelpers.filterExpressions(extraExpressions)];
-  // FIXME: find a way to remove overhead on the empty placeholders (e.g. test/fixtures/only-transforms-provided)
+  const expressions = [...baseExpressions, ...astHelpers.filterExpressions(extraExpressions), t.stringLiteral("")];
   const quasis = [...baseQuasis, ...Object.keys(extraExpressions).map(() => astHelpers.templateElement(""))];
+
+  // keep pairing between expressions and quasis with empty literals
+  if (expressions.length < quasis.length) {
+    const offset = quasis.length - expressions.length;
+
+    for (let i = 0; i < offset; i++) {
+      expressions.push(t.stringLiteral(""));
+    }
+  }
 
   path.replaceWith(t.expressionStatement(t.templateLiteral(quasis, expressions)));
 }

@@ -11,5 +11,5 @@ const post = \\"_v10\\";
 const extMobile = \\".png\\";
 const extDesktop = \\".jpeg\\";
 
-const imageUrl = \`https://res.cloudinary.com/trivago/image/upload/c_fill,h_\${getHeight()},q_\${imageQuality},t_crop,w_\${getWidth()}/\${pref}\${myPicture}\${post}\${isMobile ? extMobile : extDesktop}\${}\`;"
+const imageUrl = \`https://res.cloudinary.com/trivago/image/upload/c_fill,h_\${getHeight()},q_\${imageQuality},t_crop,w_\${getWidth()}/\${pref}\${myPicture}\${post}\${isMobile ? extMobile : extDesktop}\${\\"\\"}\`;"
 `;
