@@ -86,6 +86,6 @@ typings/
 # End of https://www.gitignore.io/api/node
 
 # Custom .gitignore configs
-lib/
 .DS_Store
-
+.vscode
+test/fixtures/**/*.spec.js

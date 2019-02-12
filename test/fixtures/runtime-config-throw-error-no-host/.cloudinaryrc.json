@@ -1,0 +1,7 @@
+{
+  "native": {
+    "cloud_name": "trivago",
+    "secure": true
+  },
+  "overrideBaseUrl": true
+}

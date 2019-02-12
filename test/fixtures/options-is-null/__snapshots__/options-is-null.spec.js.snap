@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`options-is-null 1`] = `"const imageUrl = \`\${\\"https://res.cloudinary.com/trivago/image/upload/\\"}\${\\"my-picture\\"}\${\\".jpeg\\"}\${\\"\\"}\${\\"\\"}\`;"`;

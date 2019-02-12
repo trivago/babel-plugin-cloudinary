@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`multi-level-transforms 1`] = `
+"const isMobile = false;
+const bc = getBackgroundColor();
+const clr = \\"lightblue\\";
+
+\`https://res.cloudinary.com/trivago/image/upload/e_cartoonify/r_max/co_\${clr},e_\${isMobile ? \\"outline:100\\" : \\"outline:200\\"}/b_\${bc}/c_\${getScale()},h_300/\${\\"my-picture\\"}\${\\".jpeg\\"}\${\\"\\"}\${\\"\\"}\${\\"\\"}\`;"
+`;

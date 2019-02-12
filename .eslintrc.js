@@ -7,6 +7,8 @@ module.exports = {
   plugins: ["standard", "jest"],
   env: {
     browser: false,
+    jest: true,
+    node: true,
   },
   rules: {
     camelcase: "error",

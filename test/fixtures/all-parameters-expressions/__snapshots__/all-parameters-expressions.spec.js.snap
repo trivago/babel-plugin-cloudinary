@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`all-parameters-expressions 1`] = `
+"const myPicture = \\"my-picture\\";
+const isMobile = false;
+const getWidth = () => 200;
+const getHeight = () => 300;
+const imageQuality = isMobile ? \\"auto:eco\\" : \\"auto:good\\";
+const pref = \\"gallery/sand/\\";
+const post = \\"_v10\\";
+const extMobile = \\".png\\";
+const extDesktop = \\".jpeg\\";
+
+const imageUrl = \`https://res.cloudinary.com/trivago/image/upload/c_fill,h_\${getHeight()},q_\${imageQuality},t_crop,w_\${getWidth()}/\${pref}\${myPicture}\${post}\${isMobile ? extMobile : extDesktop}\${\\"\\"}\`;"
+`;

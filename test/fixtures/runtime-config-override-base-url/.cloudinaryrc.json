@@ -1,0 +1,8 @@
+{
+  "native": {
+    "cloud_name": "trivago",
+    "secure": true
+  },
+  "host": "trivago.images.com",
+  "overrideBaseUrl": true
+}
