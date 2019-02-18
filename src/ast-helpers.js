@@ -127,7 +127,8 @@ function replaceExpressions(node, placeholder) {
       t.isIdentifier(node) ||
       t.isConditionalExpression(node) ||
       t.isCallExpression(node) ||
-      t.isMemberExpression(node)
+      t.isMemberExpression(node) ||
+      t.isTemplateLiteral(node)
     ) {
       const nodeKey = `${placeholder}${count || ""}`;
 

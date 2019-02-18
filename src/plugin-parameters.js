@@ -44,10 +44,14 @@ const PLUGIN_PARAMETERS = {
           t.isIdentifier(assetName) ||
           t.isStringLiteral(assetName) ||
           t.isConditionalExpression(assetName) ||
-          t.isCallExpression(assetName)
+          t.isCallExpression(assetName) ||
+          t.isTemplateLiteral(assetName)
         )
       ) {
-        throw new Error("assetName must be one of: identifier, stringLiteral, conditionalExpression or callExpression");
+        throw new Error(
+          "assetName must be one of:" +
+            " identifier, stringLiteral, templateLiteral, conditionalExpression or callExpression"
+        );
       }
 
       return true;
@@ -80,9 +84,17 @@ function commonValidator(name, node) {
   }
 
   if (
-    !(t.isIdentifier(node) || t.isStringLiteral(node) || t.isConditionalExpression(node) || t.isCallExpression(node))
+    !(
+      t.isIdentifier(node) ||
+      t.isStringLiteral(node) ||
+      t.isConditionalExpression(node) ||
+      t.isCallExpression(node) ||
+      t.isTemplateLiteral(node)
+    )
   ) {
-    throw new Error(`${name} must be one of: identifier, stringLiteral, conditionalExpression or callExpression`);
+    throw new Error(
+      `${name} must be one of: identifier, stringLiteral, templateLiteral, conditionalExpression or callExpression`
+    );
   }
 
   return true;
