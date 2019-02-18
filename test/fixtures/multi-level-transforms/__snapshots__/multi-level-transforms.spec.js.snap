@@ -5,5 +5,5 @@ exports[`multi-level-transforms 1`] = `
 const bc = getBackgroundColor();
 const clr = \\"lightblue\\";
 
-\`https://res.cloudinary.com/trivago/image/upload/e_cartoonify/r_max/co_\${clr},e_\${isMobile ? \\"outline:100\\" : \\"outline:200\\"}/b_\${bc}/c_\${getScale()},h_300/\${\\"my-picture\\"}\${\\".jpeg\\"}\${\\"\\"}\${\\"\\"}\${\\"\\"}\`;"
+\`https://res.cloudinary.com/trivago/image/upload/e_cartoonify/r_max/co_\${clr},e_\${isMobile ? \\"outline:100\\" : \\"outline:200\\"}/b_\${bc}/c_\${getScale()},h_300/\${\\"my-picture.jpeg\\"}\${\\"\\"}\${\\"\\"}\${\\"\\"}\${\\"\\"}\`;"
 `;

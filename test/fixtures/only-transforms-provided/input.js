@@ -1,4 +1,4 @@
-const imageUrl = __buildCloudinaryUrl("my-picture", {
+const imageUrl = __buildCloudinaryUrl("my-picture.jpeg", {
   transforms: {
     transformation: "crop",
     crop: "fill",

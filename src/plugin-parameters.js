@@ -59,7 +59,7 @@ const PLUGIN_PARAMETERS = {
     validate: postfix => commonValidator("postfix", postfix),
   },
   resourceExtension: {
-    default: ".jpeg",
+    default: "",
     defaultType: "stringLiteral",
     key: "resourceExtension",
     ord: 5,
