@@ -2,7 +2,7 @@ const isMobile = false;
 const bc = getBackgroundColor();
 const clr = "lightblue";
 
-__buildCloudinaryUrl("my-picture", {
+__buildCloudinaryUrl("my-picture.jpeg", {
   transforms: {
     transformation: [
       {

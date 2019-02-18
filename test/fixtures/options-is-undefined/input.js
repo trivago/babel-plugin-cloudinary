@@ -1,1 +1,1 @@
-const imageUrl = __buildCloudinaryUrl("my-picture", undefined);
+const imageUrl = __buildCloudinaryUrl("my-picture.jpeg", undefined);

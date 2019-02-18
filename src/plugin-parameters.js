@@ -25,22 +25,10 @@ const PLUGIN_PARAMETERS = {
       }
     },
   },
-  postfix: {
-    key: "postfix",
-    ord: 4,
-    validate: postfix => commonValidator("postfix", postfix),
-  },
   prefix: {
     key: "prefix",
     ord: 2,
     validate: prefix => commonValidator("prefix", prefix),
-  },
-  resourceExtension: {
-    default: ".jpeg",
-    defaultType: "stringLiteral",
-    key: "resourceExtension",
-    ord: 5,
-    validate: resourceExtension => commonValidator("resourceExtension", resourceExtension),
   },
   assetName: {
     key: "assetName",
@@ -64,6 +52,18 @@ const PLUGIN_PARAMETERS = {
 
       return true;
     },
+  },
+  postfix: {
+    key: "postfix",
+    ord: 4,
+    validate: postfix => commonValidator("postfix", postfix),
+  },
+  resourceExtension: {
+    default: "",
+    defaultType: "stringLiteral",
+    key: "resourceExtension",
+    ord: 5,
+    validate: resourceExtension => commonValidator("resourceExtension", resourceExtension),
   },
 };
 

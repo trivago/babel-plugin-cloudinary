@@ -1,1 +1,1 @@
-const imageUrl = __buildCloudinaryUrl("my-picture", { prefix: "gallery/sand/" });
+const imageUrl = __buildCloudinaryUrl("my-picture.jpeg", { prefix: "gallery/sand/" });
