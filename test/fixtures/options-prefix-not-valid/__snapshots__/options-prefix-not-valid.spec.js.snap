@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`options-prefix-not-valid 1`] = `[Error: unknown: prefix must be one of: identifier, stringLiteral, conditionalExpression or callExpression]`;
+exports[`options-prefix-not-valid 1`] = `[Error: unknown: prefix must be one of: identifier, stringLiteral, templateLiteral, conditionalExpression or callExpression]`;

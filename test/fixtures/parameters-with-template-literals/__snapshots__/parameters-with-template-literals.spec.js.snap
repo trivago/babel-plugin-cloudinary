@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parameters-with-template-literals 1`] = `
+"function getUrl() {
+  const myPicture = \\"my-picture\\";
+  const baseQuality = \\"auto\\";
+  const baseRadius = 20;
+
+  return \`https://res.cloudinary.com/trivago/image/upload/c_fill,h_333,q_\${\`\${baseQuality}:\${isMobile() ? \\"eco\\" : \\"best\\"}\`},r_\${\`\${baseRadius}:0:25:25\`},t_crop,w_333/\${\`\${myPicture}.jpeg\`}\${\\"\\"}\${\\"\\"}\${\\"\\"}\${\\"\\"}\`;
+}"
+`;

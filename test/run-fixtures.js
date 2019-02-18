@@ -30,7 +30,7 @@ function generateFixtureSnippet(dir) {
     jest.mock("../../../.cloudinaryrc", () => (${JSON.stringify(runtimeConfig)}), { virtual: true });
     it("${dir}", () => {
       try {
-        const { code } = babel.transform(\`${input}\`, { plugins: [plugin] });
+        const { code } = babel.transform(\`${input.toString().replace(/[`$]/g, "\\$&")}\`, { plugins: [plugin] });
         expect(code).toMatchSnapshot();
       } catch(error) {
         expect(error).toMatchSnapshot();
