@@ -67,11 +67,11 @@ function processUrl(path) {
 module.exports = function babelPluginCloudinary() {
   return {
     visitor: {
-      CallExpression(path, options) {
+      CallExpression(path) {
         const calleeName = _get(path, "node.callee.name");
 
         if (calleeName && calleeName === CALLEE_NAME) {
-          processUrl(path, options);
+          processUrl(path);
         }
       },
     },
