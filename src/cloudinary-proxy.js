@@ -3,13 +3,13 @@
  * @description
  * This module serves as a proxy to the cloudinary core. In addition
  * it adds some extra functionality based on the runtime configuration
- * file .cloudinaryrc.json.
+ * file cloudinaryrc.json.
  */
 const _has = require("lodash/has");
 const cloudinary = require("cloudinary-core");
 
 // https://cloudinary.com/documentation/solution_overview#configuration_parameters
-const runConfig = require(`${process.env.INIT_CWD}/.cloudinaryrc`);
+const runConfig = require(`${process.env.INIT_CWD}/cloudinaryrc.json`);
 
 if (!_has(runConfig, "native.cloud_name")) {
   throw new Error("You need to provide a **native** object with the mandatory **cloud_name** field");

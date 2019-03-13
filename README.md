@@ -6,7 +6,7 @@ Compile cloudinary URLs at build time.
 
 ### Globals
 
-You can define the globals for your cloudinary URLs in a `.cloudinaryrc.json` that should be placed in the root of your project.
+You can define the globals for your cloudinary URLs in a `cloudinaryrc.json` that should be placed in the root of your project.
 
 ```json
 {
