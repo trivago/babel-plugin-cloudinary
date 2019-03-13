@@ -11,7 +11,6 @@
 const _get = require("lodash/get");
 const t = require("babel-types");
 
-// TODO: support <host> making it replaceable at runtime
 const PLUGIN_PARAMETERS = {
   transforms: {
     key: "transforms",

@@ -15,7 +15,6 @@ if (!_has(runConfig, "native.cloud_name")) {
   throw new Error("You need to provide a **native** object with the mandatory **cloud_name** field");
 }
 
-// TODO: make the callee name configurable via .cloudinaryrc
 const CALLEE_NAME = "__buildCloudinaryUrl";
 const cl = new cloudinary.Cloudinary(runConfig.native);
 const BASE_URL_PLACEHOLDER = new RegExp(`res.cloudinary.com/${runConfig.native.cloud_name}/image/upload`, "gi");
