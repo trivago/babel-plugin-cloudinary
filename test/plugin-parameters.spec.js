@@ -4,11 +4,18 @@ const { PLUGIN_PARAMETERS } = require("../src/plugin-parameters");
 describe("plugin-parameters", () => {
   it("all parameters should contain the mandatory properties", () => {
     const mandatory = ["key", "ord"];
+    const typeCheckMap = {
+      key: "string",
+      ord: "number",
+    };
 
     Object.keys(PLUGIN_PARAMETERS).forEach(param => {
       mandatory.forEach(mandatoryProp => {
         if (typeof PLUGIN_PARAMETERS[param] === "object") {
-          expect(PLUGIN_PARAMETERS[param].hasOwnProperty(mandatoryProp)).toBe(true);
+          const o = PLUGIN_PARAMETERS[param];
+
+          expect(o.hasOwnProperty(mandatoryProp)).toBe(true);
+          expect(typeof o[mandatoryProp]).toEqual(typeCheckMap[mandatoryProp]);
         }
       });
     });
