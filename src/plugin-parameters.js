@@ -74,7 +74,7 @@ const PLUGIN_PARAMETERS = {
  * Common type checks for AST node.
  * @param {string} name - the name of the property.
  * @param {Object} node - the node to validate.
- * @returns {undefined}
+ * @returns {boolean} returns true in case given node is valid.
  * @throws {Error} throws an error when given node is not valid.
  */
 function commonValidator(name, node) {
@@ -103,7 +103,7 @@ function commonValidator(name, node) {
  * It performs validation on the plugin parameters.
  * @param {Object} assetNameNode - asset name node to validate.
  * @param {Object} optionsNode - options node to validate.
- * @returns {undefined}
+ * @returns {boolean} returns true in case validation in both nodes succeeds.
  * @throws {Error} throws an error if the properties are not
  * compliant with the plugin parameters rules. Generally the rules are:
  * - when defined the plugin options parameter must always be an objectExpression
