@@ -39,7 +39,7 @@ function processUrl(path) {
   );
   const allPluginParameters = Object.assign({}, parameters, { assetName });
   const extraExpressions = Object.keys(PLUGIN_PARAMETERS)
-    .sort((paramA, paramB) => PLUGIN_PARAMETERS[paramA].ord > PLUGIN_PARAMETERS[paramB].ord)
+    .sort((paramA, paramB) => PLUGIN_PARAMETERS[paramA].ord - PLUGIN_PARAMETERS[paramB].ord)
     .map(param => {
       if (allPluginParameters[param]) {
         return allPluginParameters[param];
