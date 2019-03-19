@@ -1,5 +1,5 @@
 const t = require("babel-types");
-const { PLUGIN_PARAMETERS } = require("../src/plugin-parameters");
+const { PLUGIN_PARAMETERS } = require("../lib/plugin-parameters");
 
 describe("plugin-parameters", () => {
   it("all parameters should contain the mandatory properties", () => {
