@@ -5,7 +5,7 @@
   "author": "Daniel Caldas",
   "license": "Apache-2.0",
   "main": "lib/index.js",
-  "types": "lib/types.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "check": "npm run lint && npm run test",
     "dev": "nodemon --exec jest --env=node --watch lib --watch test",
