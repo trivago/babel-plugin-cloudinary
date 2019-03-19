@@ -72,7 +72,3 @@ function getImageUrl(imageName) {
   });
 }
 ```
-
-### TODO
-
-- [ ] Documentation about creating typescript interfaces for plugin integration;
