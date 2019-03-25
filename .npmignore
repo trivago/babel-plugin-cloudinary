@@ -1,9 +1,7 @@
 .editorconfig
 .eslintrc.js
-.git
 .github
 .gitignore
-.npmrc
 .prettierignore
 .prettierrc.js
 .travis.yml
@@ -12,3 +10,4 @@ coverage
 package-lock.json
 test
 tsconfig.json
+.eslintignore

@@ -1,1 +1,2 @@
 test/fixtures/**/*.js
+lib/index.d.ts

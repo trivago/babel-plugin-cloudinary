@@ -6,7 +6,7 @@ Compile cloudinary URLs at build time.
 
 ### Globals
 
-You can define the globals for your cloudinary URLs in a `.cloudinaryrc.json` that should be placed in the root of your project.
+You can define the globals for your cloudinary URLs in a `cloudinaryrc.json` that should be placed in the root of your project.
 
 ```json
 {
@@ -73,6 +73,19 @@ function getImageUrl(imageName) {
 }
 ```
 
-### TODO
+### Additional configurations
 
-- [ ] Documentation about creating typescript interfaces for plugin integration;
+This projects ships together with the plugin a types definition file (`index.d.ts`) that will
+be automatically recognized by IDEs and text editors with typescript based _IntelliSense_. In case you have some linting in place it might also be convenient to make `__buildCloudinaryUrl` a global. With [eslint](https://eslint.org/docs/user-guide/configuring#specifying-environments) you can achieve this by adding a simple property to the `globals` block just like:
+
+```javascript
+// .eslintrc.js
+module.exports = {
+  // ...
+  globals: {
+    // ...
+    __buildCloudinaryUrl: true,
+  },
+  // ...
+};
+```

@@ -16,18 +16,18 @@ function generateFixtureSnippet(dir) {
   let runtimeConfig;
   const input = fs.readFileSync(`${FIXTURES_BASE_DIR}/${dir}/input.js`);
 
-  // load .cloudinaryrc file, fallback to default if no local config to fixture is found
+  // load cloudinaryrc file, fallback to default if no local config to fixture is found
   try {
-    runtimeConfig = require(`${FIXTURES_BASE_DIR}/${dir}/.cloudinaryrc`);
+    runtimeConfig = require(`${FIXTURES_BASE_DIR}/${dir}/cloudinaryrc.json`);
   } catch (error) {
-    runtimeConfig = require(`${FIXTURES_BASE_DIR}/../.cloudinaryrc`);
+    runtimeConfig = require(`${FIXTURES_BASE_DIR}/../cloudinaryrc.json`);
   }
 
   const spec = `
     // WARNING: this file is generated automatically
     const babel = require("babel-core");
-    const plugin = require("../../../src");
-    jest.mock("../../../.cloudinaryrc", () => (${JSON.stringify(runtimeConfig)}), { virtual: true });
+    const plugin = require("../../../lib");
+    jest.mock("../../../cloudinaryrc.json", () => (${JSON.stringify(runtimeConfig)}), { virtual: true });
     it("${dir}", () => {
       try {
         const { code } = babel.transform(\`${input.toString().replace(/[`$]/g, "\\$&")}\`, { plugins: [plugin] });
