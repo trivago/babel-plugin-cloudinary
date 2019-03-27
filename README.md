@@ -1,5 +1,7 @@
 # babel-plugin-cloudinary
 
+[![npm version](https://img.shields.io/npm/v/babel-plugin-cloudinary.svg?style=flat-square)](https://www.npmjs.com/package/babel-plugin-cloudinary)
+
 Compile cloudinary URLs at build time.
 
 ## API
