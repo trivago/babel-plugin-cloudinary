@@ -2,7 +2,9 @@
 
 ## master
 
-- Support asset names that are URL-encoded by Cloudinary in `getBaseImageUrl`.
+### Bugfix
+
+- [#7](https://github.com/trivago/babel-plugin-cloudinary/issues/7) Support asset names in `getBaseImageUrl` that are URL-encoded by Cloudinary API.
 
 ## [0.0.1](https://github.com/trivago/babel-plugin-cloudinary/tree/0.0.1)
 
