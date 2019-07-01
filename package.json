@@ -7,14 +7,14 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "check": "npm run lint && npm run test",
+    "check": "yarn run lint && yarn run test",
     "dev": "nodemon --exec jest --env=node --watch lib --watch test",
     "fixtures": "node test/run-fixtures.js",
     "lint:fix": "eslint --fix lib test",
     "lint": "eslint --config=.eslintrc.js \"lib/*\" \"test/**/*.js\"",
-    "prepublish": "npm run check",
-    "test:clean": "npm run fixtures && jest --env=node --verbose --coverage --no-cache --updateSnapshot",
-    "test": "npm run fixtures && jest --env=node --verbose --coverage"
+    "prepublish": "yarn run check",
+    "test:clean": "yarn run fixtures && jest --env=node --verbose --coverage --no-cache --updateSnapshot",
+    "test": "yarn run fixtures && jest --env=node --verbose --coverage"
   },
   "engines": {
     "node": ">=8.9.0"
@@ -25,6 +25,9 @@
   "dependencies": {
     "babel-types": "^6.26.0",
     "lodash": "^4.17.11"
+  },
+  "resolutions": {
+    "babel-cli/chokidar": "^2.0.4"
   },
   "husky": {
     "hooks": {

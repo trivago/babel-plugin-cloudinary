@@ -1,8 +1,10 @@
 language: node_js
 node_js:
-    - "8.11.0"
+    - "10.16.0"
+before_install:
+  - npm install -g yarn
 install:
-    - npm install
+    - yarn install
 script:
-    - npm run lint
-    - npm run test
+    - yarn lint
+    - yarn test
