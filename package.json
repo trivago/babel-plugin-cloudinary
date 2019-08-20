@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "babel-types": "^6.26.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.13"
   },
   "resolutions": {
     "babel-cli/chokidar": "^2.0.4"
