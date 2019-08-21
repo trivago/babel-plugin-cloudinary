@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/babel-plugin-cloudinary.svg?style=flat-square)](https://www.npmjs.com/package/babel-plugin-cloudinary)
 
-Compile cloudinary URLs at build time.
+Compile cloudinary . These properties can still be overwritten for individual cases, by `__buildCloudinaryUrl` call.
 
 ## API
 
@@ -17,7 +17,12 @@ You can define the globals for your cloudinary URLs in a `cloudinaryrc.json` tha
     "secure": true
   },
   "overrideBaseUrl": true,
-  "host": "trivago.images.com"
+  "host": "trivago.images.com",
+  "defaultTransforms": {
+    // NOT RELEASED YET
+    "fetch_format": "auto",
+    "quality": "auto"
+  }
 }
 ```
 
@@ -25,6 +30,8 @@ You can define the globals for your cloudinary URLs in a `cloudinaryrc.json` tha
   all the [configs in the official cloudinary API](https://cloudinary.com/documentation/solution_overview#configuration_parameters).
 - **overrideBaseUrl** - set this to true if you want to override cloudinary default URL with the property **host**.
 - **host** - a host to perform replace the default generated base URL (`res.cloudinary.com/trivago/image/upload`).
+- **defaultTransforms** [**NOT RELEASED YET**] - an object that holds transforms that are applied by default
+  to all the generated cloudinary URLs. These properties can still be overwritten for individual cases, by passing the same property within the `option.transforms` of that `__buildCloudinaryUrl` call.
 
 ### \_\_buildCloudinaryUrl
 
