@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`runtime-config-default-transforms-override 1`] = `"const imageUrl = \`\${\\"https://trivago.images.com/e_red:50,f_auto,o_30,q_auto:best/\\"}\${\\"my-picture.jpeg\\"}\${\\"\\"}\${\\"\\"}\${\\"\\"}\`;"`;

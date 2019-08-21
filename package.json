@@ -30,6 +30,7 @@
     "babel-cli/chokidar": "^2.0.4"
   },
   "husky": {
+    "skipCI": true,
     "hooks": {
       "pre-commit": "lint-staged"
     }
