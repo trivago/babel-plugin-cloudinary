@@ -2,6 +2,8 @@
 
 ## master
 
+- [#14](https://github.com/trivago/babel-plugin-cloudinary/pull/14) Update [eslint-utils](https://github.com/mysticatea/eslint-utils) to version [1.4.2](https://github.com/mysticatea/eslint-utils/commit/4e1bc077c2a6bb00538d66b69a63c24de3463bed).
+- [#13](https://github.com/trivago/babel-plugin-cloudinary/pull/13) Support binary operators within plugin parameters (e.g. concatenating strings with `+`).
 - [#12](https://github.com/trivago/babel-plugin-cloudinary/pull/12) Global default cloudinary transforms with `defaultTransforms`.
 
 ## [0.0.3](https://github.com/trivago/babel-plugin-cloudinary/tree/0.0.3)
