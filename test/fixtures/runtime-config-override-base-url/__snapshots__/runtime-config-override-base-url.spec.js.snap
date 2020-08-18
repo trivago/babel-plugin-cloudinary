@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`runtime-config-override-base-url 1`] = `"const imageUrl = \`\${\\"https://trivago.images.com/\\"}\${\\"my-picture.jpeg\\"}\${\\"\\"}\${\\"\\"}\${\\"\\"}\`;"`;
+exports[`runtime-config-override-base-url 1`] = `"const imageUrl = \`\${\\"https://trivago.images.com/\\"}\${\\"my-picture.jpeg\\"}\${\\"\\"}\${\\"\\"}\${\\"\\"}\${\\"\\"}\`;"`;

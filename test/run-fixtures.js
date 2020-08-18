@@ -25,7 +25,7 @@ function generateFixtureSnippet(dir) {
 
   const spec = `
     // WARNING: this file is generated automatically
-    const babel = require("babel-core");
+    const babel = require("@babel/core");
     const plugin = require("../../../lib");
     jest.mock("../../../cloudinaryrc.json", () => (${JSON.stringify(runtimeConfig)}), { virtual: true });
     it("${dir}", () => {
