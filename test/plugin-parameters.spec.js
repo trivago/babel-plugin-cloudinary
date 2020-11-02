@@ -1,4 +1,4 @@
-const t = require("babel-types");
+const t = require("@babel/types");
 const { PLUGIN_PARAMETERS } = require("../lib/plugin-parameters");
 
 describe("plugin-parameters", () => {
@@ -9,11 +9,12 @@ describe("plugin-parameters", () => {
       ord: "number",
     };
 
-    Object.keys(PLUGIN_PARAMETERS).forEach(param => {
-      mandatory.forEach(mandatoryProp => {
+    Object.keys(PLUGIN_PARAMETERS).forEach((param) => {
+      mandatory.forEach((mandatoryProp) => {
         if (typeof PLUGIN_PARAMETERS[param] === "object") {
           const o = PLUGIN_PARAMETERS[param];
 
+          // eslint-disable-next-line
           expect(o.hasOwnProperty(mandatoryProp)).toBe(true);
           expect(typeof o[mandatoryProp]).toEqual(typeCheckMap[mandatoryProp]);
         }
@@ -22,13 +23,13 @@ describe("plugin-parameters", () => {
   });
 
   it("all the properties' names must match their key", () => {
-    Object.keys(PLUGIN_PARAMETERS).forEach(param => {
+    Object.keys(PLUGIN_PARAMETERS).forEach((param) => {
       expect(PLUGIN_PARAMETERS[param].key).toEqual(param);
     });
   });
 
   it("all the properties with a default value must have a valid defaultType", () => {
-    Object.keys(PLUGIN_PARAMETERS).forEach(param => {
+    Object.keys(PLUGIN_PARAMETERS).forEach((param) => {
       if (PLUGIN_PARAMETERS[param].default) {
         expect(t[PLUGIN_PARAMETERS[param].defaultType]).toBeDefined();
       }
