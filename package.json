@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-cloudinary",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Compile cloudinary URLs at build time",
   "author": "Daniel Caldas",
   "license": "Apache-2.0",
