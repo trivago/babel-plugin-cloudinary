@@ -2,6 +2,12 @@
 
 ## master
 
+## [0.2.0](https://github.com/trivago/babel-plugin-cloudinary/tree/0.2.0)
+
+### Features
+
+- [#20](https://github.com/trivago/babel-plugin-cloudinary/pull/20) Fallback to process.cwd() for finding the cloudinary config file
+
 ## [0.1.0](https://github.com/trivago/babel-plugin-cloudinary/tree/0.1.0)
 
 ### Features
