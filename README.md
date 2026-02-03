@@ -1,5 +1,9 @@
 # babel-plugin-cloudinary
 
+> [!CAUTION]
+> This repository has been archived as of October 2025.  
+> If you wish to update or extend this project, please create a fork.
+
 [![npm version](https://img.shields.io/npm/v/babel-plugin-cloudinary.svg?style=flat-square)](https://www.npmjs.com/package/babel-plugin-cloudinary)
 
 Compile cloudinary URLs at build time.
